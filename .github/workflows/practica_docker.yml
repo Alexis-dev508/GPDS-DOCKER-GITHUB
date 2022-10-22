@@ -1,4 +1,4 @@
-name: Docker Image Migrator
+name: practica docker
 
 on:
   workflow_dispatch:
@@ -18,6 +18,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           
+      - name: Push de la imagen
+        run: docker push alexisdev508/${{ github.event.inputs.image_name }}
+        
       - name: Descargar imagen
         run: docker pull alexisdev508/${{ github.event.inputs.image_name }}
         
