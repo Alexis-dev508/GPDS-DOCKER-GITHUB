@@ -1,0 +1,17 @@
+name: Practica_docker #Nombre del workflow
+
+on:
+ workflow_dispatch: #Activa el workflow solo cuando nosotros le indiquemos manualmente
+  inputs: #Nos pide el nombre de la imagen
+   image_name:
+    description: nombre de la imagen
+    required: true
+jobs:
+ practica_docker:
+  runs-on: ubuntu-latest #indicamos en que SO correra
+  steps: #definimos los pisos que tiene
+   - name: Login Dockerhub #Nombre del paso
+     uses: docker/login-action@v1 #indicamos que usaremos el action de dockerhub para iniciar sesion
+     with:
+      username: ${{ secrets.DOCKERHUB_USER }} #Iniciaremos sesion en dockerhub con el secret de usuario para dockerhub 
+      password: ${{ secrets.DOCKERHUB_PASSWORD }} #Iniciaremos sesion en dockerhub con el secret de password para docjerhub
