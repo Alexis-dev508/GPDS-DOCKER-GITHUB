@@ -15,12 +15,9 @@ jobs:
      with:
       username: ${{ secrets.DOCKERHUB_USER }} #Iniciaremos sesion en dockerhub con el secret de usuario para dockerhub 
       password: ${{ secrets.DOCKERHUB_PASSWORD }} #Iniciaremos sesion en dockerhub con el secret de password para docjerhub
-      
-   - name: Push Image
-     run: docker push registry.gitlab.com/practica-docker/practica-docker/${{ github.event.inputs.image_name }}
      
    - name: Descargar imagen
-     run: docker pull alexisdev508/${{ github.event.inputs.image_name }} #Hacemos un pull de la imagen de Dockerhub
+     run: docker pull alexisdev508/${{ github.event.inputs.image_name }}:latest #Hacemos un pull de la imagen de Dockerhub
    
    - name: Cambiar nombre de la imagen
      run: docker tag alexisdev508/${{ github.event.inputs.image_name }} registry.gitlab.com/practica-docker/practica-docker/${{ github.event.inputs.image_name }}
@@ -32,6 +29,8 @@ jobs:
       password: ${{ secrets.GITLAB_PASSWORD }} #Iniciaremos sesion en Gitlab con el secret de password para Gitlab
       registry: registry.gitlab.com
    
+   - name: Push Image
+     run: docker push registry.gitlab.com/practica-docker/practica-docker/${{ github.event.inputs.image_name }}
   
      
      
