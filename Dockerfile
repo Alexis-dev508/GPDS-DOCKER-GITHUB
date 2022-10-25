@@ -19,7 +19,7 @@ services:
   apache:
       build:
         #Indicamos la carpeta donde guardamos el Docker File
-        context: ./Dockerfile
+        context: ./Dockerfile2
           #Indicamos el archivo dockerfile de este contenedor
         dockerfile: apache_file
       ports: 
