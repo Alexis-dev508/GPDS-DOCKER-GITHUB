@@ -1,12 +1,9 @@
 name: Practica Docker
 
 on:
- workflow_dispatch: #Activa el workflow solo cuando nosotros le indiquemos manualmente
-  inputs: #Nos pide el nombre de la imagen
-   image_name:
-    description: nombre de la imagen
-    required: true
-
+ push:
+    branches: [ master ]
+    
 jobs:
 
   build:
@@ -19,7 +16,7 @@ jobs:
       run: |
         echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USER }}" --password-stdin docker.io
         docker build . --file Dockerfile --tag docker.io/${{ secrets.DOCKERHUB_USER }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
-        docker push docker.io/${{ secrets.DOCKER_HUB_USER }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
+        docker push docker.io/${{ secrets.DOCKERHUB_USER }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
         
         
         
